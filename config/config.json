@@ -1,0 +1,32 @@
+{
+  "port": 4003,
+  "endpoints": [],
+  "log_level": "info",
+  "statsd": {
+    "host": "localhost",
+    "port": 8125
+  },
+  "api": {
+    "apiURL": "https://localhost:8080",
+    "username": "root@openhim.org",
+    "password": "password"
+  },
+  "mediatorConf": {
+    "urn": "urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33",
+    "version": "1.1.1",
+    "name": "file-queue",
+    "description": "Async file queue mediator for the OpenHIM",
+    "defaultChannelConfig": [],
+    "endpoints": [
+      {
+        "name": "File queue",
+        "host": "localhost",
+        "path": "/test",
+        "port": "4002",
+        "primary": true,
+        "type": "http"
+      }
+    ],
+    "configDefs": []
+  }
+}

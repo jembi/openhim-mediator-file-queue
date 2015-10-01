@@ -1,0 +1,49 @@
+{
+  "name": "openhim-mediator-file-queue",
+  "version": "2.0.0",
+  "description": "An async file queue for OpenHIM mediators",
+  "author": "Jembi Health Systems (https://github.com/jembi)",
+  "homepage": "https://github.com/jembi/openhim-mediator-file-queue",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jembi/openhim-mediator-file-queue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jembi/openhim-mediator-file-queue/issues"
+  },
+  "scripts": {
+    "start": "node lib"
+  },
+  "bin" : {
+    "file-queue" : "lib/index.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "body-parser": "^1.10.2",
+    "confit": "^2.0.3",
+    "express": "^4.11.1",
+    "graceful-fs": "^4.1.2",
+    "mkdirp": "^0.5.0",
+    "needle": "^0.10.0",
+    "node-statsd": "^0.1.1",
+    "on-finished": "^2.2.0",
+    "openhim-mediator-utils": "^0.2.0",
+    "type-is": "^1.5.5",
+    "winston": "^1.0.1"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "openhim",
+    "mediator",
+    "async",
+    "file",
+    "queue"
+  ],
+  "license": "MPL-2.0"
+}
