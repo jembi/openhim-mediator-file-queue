@@ -9,6 +9,10 @@ Once installed you will have to manually edit the config files in the location w
 
 You may add a `production.json` file to the config folder to override or add any config values.
 
+See this visual example of how this work as an OpenHIM mediator. Note the curl commands return instantly but the mediator knows to tell the OpenHIM that these are still processing and updates them after they complete asynchronously.
+
+![Alt text](file-queue.gif)
+
 ## How it works
 
 The file queue simply handles incoming requests, writing the files to a directory on the filesystem, and then processes the queue, sending the files to a configured endpoint. If the file is successfully sent then the queued file is deleted from the filesystem, otherwise it is moved to an error directory.
