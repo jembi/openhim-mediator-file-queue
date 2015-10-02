@@ -1,7 +1,6 @@
 {
-  "libs": [
-    "ecma5"
-  ],
+  "ecmaVersion": 6,
+  "libs": [],
   "loadEagerly": [
     "**.js"
   ],
