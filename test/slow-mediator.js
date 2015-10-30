@@ -11,7 +11,7 @@ http.createServer((req, res) => {
       response: {
         status: 201,
         body: 'Phew, done!\n',
-        timestamp: new Date().toString()
+        timestamp: new Date().toISOString()
       },
       orchestrations: [
         {
