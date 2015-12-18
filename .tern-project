@@ -2,9 +2,12 @@
   "ecmaVersion": 6,
   "libs": [],
   "loadEagerly": [
-    "**.js"
+    "lib/*.js"
   ],
   "plugins": {
-    "node": {}
+    "node": {},
+    "doc_comment": {
+      "fullDocs": true
+    }
   }
 }
