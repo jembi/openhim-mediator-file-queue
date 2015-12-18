@@ -32,11 +32,15 @@ function setupTestFiles(bodyFile, metaFile) {
     fs.writeFileSync('test/from/xb58d4327b141ebffe6e990c.txt', 'Test123');
   }
   if (metaFile) {
-    fs.writeFileSync('test/from/xb58d4327b141ebffe6e990c-metadata.json', {'test': 'obj'});
+    fs.writeFileSync('test/from/xb58d4327b141ebffe6e990c-metadata.json', JSON.stringify({'test': 'obj'}));
   }
 }
 
 function cleanupTestFiles() {
+  try { fs.unlinkSync('test/from/xb58d4327b141ebffe6e990c.txt');
+  } catch(e) { /* delete if exist */ }
+  try { fs.unlinkSync('test/from/xb58d4327b141ebffe6e990c-metadata.json');
+  } catch(e) { /* delete if exist */ }
   try { fs.unlinkSync('test/to/xb58d4327b141ebffe6e990c.txt');
   } catch(e) { /* delete if exist */ }
   try { fs.unlinkSync('test/to/xb58d4327b141ebffe6e990c-metadata.json');
@@ -47,7 +51,10 @@ function cleanupTestFiles() {
   } catch(e) { /* delete if exist */ }
 }
 
-tap.test('should move both body and metadata files', function(t) {
+// In case there are leftovers from previously failed tests
+cleanupTestFiles();
+
+tap.test('moveTx - should move both body and metadata files', function(t) {
   setupTestFiles(true, true);
   var moveTx = worker.__get__('moveTx');
   moveTx('xb58d4327b141ebffe6e990c.txt', 'test/from', 'test/to', true, function(err) {
@@ -59,7 +66,7 @@ tap.test('should move both body and metadata files', function(t) {
   t.tearDown(cleanupTestFiles);
 });
 
-tap.test('should move just body if forward metadata is false', function(t) {
+tap.test('moveTx - should move just body if forward metadata is false', function(t) {
   setupTestFiles(true, false);
   var moveTx = worker.__get__('moveTx');
   moveTx('xb58d4327b141ebffe6e990c.txt', 'test/from', 'test/to', false, function(err) {
@@ -70,7 +77,7 @@ tap.test('should move just body if forward metadata is false', function(t) {
   t.tearDown(cleanupTestFiles);
 });
 
-tap.test('should throw an error if metadata file doesnt exist', function(t) {
+tap.test('moveTx - should throw an error if metadata file doesnt exist', function(t) {
   setupTestFiles(true, false);
   var moveTx = worker.__get__('moveTx');
   moveTx('xb58d4327b141ebffe6e990c.txt', 'test/from', 'test/to', true, function(err) {
@@ -80,10 +87,60 @@ tap.test('should throw an error if metadata file doesnt exist', function(t) {
   t.tearDown(cleanupTestFiles);
 });
 
-tap.test('should throw an error if body file doesnt exist', function(t) {
-  t.plan(1);
+tap.test('moveTx - should throw an error if body file doesnt exist', function(t) {
   var moveTx = worker.__get__('moveTx');
   moveTx('xb58d4327b141ebffe6e990c.txt', 'test/from', 'test/to', false, function(err) {
     t.ok(err);
+    t.end();
+  });
+});
+
+tap.test('delTx - should delete both files', function(t) {
+  t.plan(3);
+  setupTestFiles(true, true);
+  var delTx = worker.__get__('delTx');
+  delTx('xb58d4327b141ebffe6e990c.txt', 'test/from', true, function(err) {
+    t.notOk(err);
+    fs.stat('test/from/xb58d4327b141ebffe6e990c.txt', function(err) {
+      t.ok(err);
+    });
+    fs.stat('test/from/xb58d4327b141ebffe6e990c-metadata.json', function(err) {
+      t.ok(err);
+    });
+  });
+  t.tearDown(cleanupTestFiles);
+});
+
+tap.test('delTx - should just body file when not forwarding metadata', function(t) {
+  t.plan(3);
+  setupTestFiles(true, true);
+  var delTx = worker.__get__('delTx');
+  delTx('xb58d4327b141ebffe6e990c.txt', 'test/from', false, function(err) {
+    t.notOk(err);
+    fs.stat('test/from/xb58d4327b141ebffe6e990c.txt', function(err) {
+      t.ok(err);
+    });
+    fs.stat('test/from/xb58d4327b141ebffe6e990c-metadata.json', function(err) {
+      t.notOk(err);
+    });
+  });
+  t.tearDown(cleanupTestFiles);
+});
+
+tap.test('delTx - should throw an error if metadata file doesnt exist', function(t) {
+  setupTestFiles(true, false);
+  var delTx = worker.__get__('delTx');
+  delTx('xb58d4327b141ebffe6e990c.txt', 'test/from', true, function(err) {
+    t.ok(err);
+    t.end();
+  });
+  t.tearDown(cleanupTestFiles);
+});
+
+tap.test('delTx - should throw an error if body file doesnt exist', function(t) {
+  var delTx = worker.__get__('delTx');
+  delTx('xb58d4327b141ebffe6e990c.txt', 'test/from', false, function(err) {
+    t.ok(err);
+    t.end();
   });
 });
