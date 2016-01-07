@@ -4,7 +4,7 @@
   "endpoints": [
     {
       "name": "test",
-      "path": "/test",
+      "path": "/test/*",
       "url": "http://localhost:9999",
       "updateTx": true,
       "forwardMetadata": true

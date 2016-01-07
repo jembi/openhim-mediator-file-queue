@@ -4,3 +4,4 @@ queue/
 working/
 error/
 .nyc_output
+coverage
