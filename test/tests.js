@@ -17,12 +17,14 @@ tap.test('should write metadata to file', function(t) {
     }
   };
   var writeMetadata = index.__get__('writeMetadata');
-  writeMetadata('test123.json', 'test', req);
-  var file = fs.readFileSync('test/test123-metadata.json', 'utf-8');
-  var json = JSON.parse(file);
-  t.same(json, req);
-  fs.unlinkSync('test/test123-metadata.json');
-  t.end();
+  writeMetadata('test123.json', 'test', req, function(err) {
+    t.error(err);
+    var file = fs.readFileSync('test/test123-metadata.json', 'utf-8');
+    var json = JSON.parse(file);
+    t.same(json, req);
+    fs.unlinkSync('test/test123-metadata.json');
+    t.end();
+  });
 });
 
 function setupTestFiles(bodyFile, metaFile) {
