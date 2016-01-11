@@ -12,10 +12,12 @@
     "url": "https://github.com/jembi/openhim-mediator-file-queue/issues"
   },
   "scripts": {
-    "start": "node lib"
+    "start": "node lib",
+    "test": "tap --cov test/tests.js",
+    "coverage": "tap test/tests.js --cov --coverage-report=lcov"
   },
-  "bin" : {
-    "file-queue" : "lib/index.js"
+  "bin": {
+    "file-queue": "lib/index.js"
   },
   "engines": {
     "node": ">=4"
@@ -45,5 +47,9 @@
     "file",
     "queue"
   ],
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "rewire": "^2.5.1",
+    "tap": "^2.3.2"
+  }
 }

@@ -23,7 +23,27 @@ Multiple "endpoints" can be configured. Each endpoint handles incoming requests 
 
 An array of endpoints should be configured in the config file. An endpoint can have the following properties:
 * `name` (required) - The name of the endpoint which is used for setting up the RESTlike routes for the worker.
-* `path` (required) - The path to use for handling incoming requests.
+* `path` (required) - The path to use for handling incoming requests. A '\*' may be used to match any number of characters in a path. E.g. 'this/is/a/test/\*'.
 * `url` (required) - The URL to send the files to when processing them from the queue.
-* `paused` - Whether or not the endpoint's worker should be paused by default. This must be a boolean value.
+* `paused` - Whether or not the endpoint's worker should be paused by default. This must be a boolean value. Defaults to false.
 * `parallel` - The number of files that the worker should process in parallel. Defaults to 2.
+* `updateTx` - Whether or not to attempt to update the OpenHIM transaction once the message has been processed. Defaults to false.
+* `forwardMetadata` - Whether or not to use the url, headers and HTTP method of the original request when it is forwarded. The path of the original request will be appended to the `url` property. Defaults to false.
+
+Here is an example config file:
+
+```js
+{
+  "port": 4002,
+  "log_level": "info",
+  "endpoints": [
+    {
+      "name": "test",
+      "path": "/test",
+      "url": "http://localhost:9999",
+      "updateTx": true,
+      "forwardMetadata": true
+    }
+  ]
+}
+```

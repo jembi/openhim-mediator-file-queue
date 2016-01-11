@@ -3,3 +3,5 @@ node_modules/
 queue/
 working/
 error/
+.nyc_output
+coverage
