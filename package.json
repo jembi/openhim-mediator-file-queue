@@ -1,6 +1,6 @@
 {
   "name": "openhim-mediator-file-queue",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An async file queue for OpenHIM mediators",
   "author": "Jembi Health Systems (https://github.com/jembi)",
   "homepage": "https://github.com/jembi/openhim-mediator-file-queue",
