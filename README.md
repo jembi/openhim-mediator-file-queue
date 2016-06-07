@@ -9,6 +9,12 @@ Once installed you will have to manually edit the config files in the location w
 
 You may add a `production.json` file to the config folder to override or add any config values.
 
+For development purposes, in order to communicate to the OpenHIM core since it uses self-signed certificates, execute:
+
+```sh
+  NODE_TLS_REJECT_UNAUTHORIZED=0 npm start
+```
+
 See this visual example of how this work as an OpenHIM mediator. Note the curl commands return instantly but the mediator knows to tell the OpenHIM that these are still processing and updates them after they complete asynchronously.
 
 ![Alt text](file-queue.gif)

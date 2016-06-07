@@ -4,10 +4,31 @@
   "endpoints": [
     {
       "name": "test",
-      "path": "/test/*",
-      "url": "http://localhost:9999",
+      "path": "/test",
+      "url": "http://192.168.1.71:4002",
       "updateTx": true,
       "forwardMetadata": true
     }
-  ]
+  ],
+  "mediatorConf": {
+    "defaultChannelConfig": [
+      {
+        "name": "File Queue",
+        "urlPattern": "^/test$",
+        "status": "enabled",
+        "routes": [
+          {
+            "name": "File queue",
+            "host": "192.168.1.71",
+            "path": "/test",
+            "port": "4002",
+            "secured": false,
+            "primary": true,
+            "type": "http"
+          }
+        ],
+        "authType": "public"
+      }
+    ]
+  }
 }
