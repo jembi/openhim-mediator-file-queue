@@ -3,9 +3,9 @@
   "log_level": "debug",
   "endpoints": [
     {
-      "name": "test",
+      "name": "echoServer",
       "path": "/test",
-      "url": "http://192.168.1.71:4002",
+      "url": "http://localhost:8000",
       "updateTx": true,
       "forwardMetadata": true
     }
@@ -19,7 +19,7 @@
         "routes": [
           {
             "name": "File queue",
-            "host": "192.168.1.71",
+            "host": "localhost",
             "path": "/test",
             "port": "4002",
             "secured": false,
