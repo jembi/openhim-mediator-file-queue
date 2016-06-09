@@ -6,6 +6,8 @@
       "name": "echoServer",
       "path": "/test",
       "url": "http://localhost:8000",
+      "paused": false,
+      "parallel": 2,
       "updateTx": true,
       "forwardMetadata": true
     }
