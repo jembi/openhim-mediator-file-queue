@@ -27,6 +27,68 @@
         "type": "http"
       }
     ],
-    "configDefs": []
+    "configDefs": [
+      {
+        "param": "endpoint1",
+        "displayName": "Endpoint1",
+        "description": "Configure File Queue endpoints",
+        "type": "struct",
+        "template": [
+          {
+            "param": "name",
+            "displayName": "Name",
+            "description": "The name of the endpoint which is used for setting up the RESTlike routes for the worker",
+            "type": "string"
+          },
+          {
+            "param": "path",
+            "displayName": "Path",
+            "description": "The path to use for handling incoming requests. A '*' may be used to match any number of characters in a path.",
+            "type": "string"
+          },
+          {
+            "param": "url",
+            "displayName": "URL",
+            "description": "The URL to send the files to when processing them from the queue.",
+            "type": "string"
+          },
+          {
+            "param": "paused",
+            "displayName": "Paused",
+            "description": "Whether or not the endpoint's worker should be paused by default. This must be a boolean value. Defaults to false.",
+            "type": "bool"
+          },
+          {
+            "param": "parallel",
+            "displayName": "Parallel",
+            "description": "The number of files that the worker should process in parallel. Defaults to 2.",
+            "type": "number"
+          },
+          {
+            "param": "updateTx",
+            "displayName": "UpdateTx",
+            "description": "Whether or not to attempt to update the OpenHIM transaction once the message has been processed. Defaults to false.",
+            "type": "bool"
+          },
+          {
+            "param": "forwardMetadata",
+            "displayName": "ForwardMetadata",
+            "description": "Whether or not to use the url, headers and HTTP method of the original request when it is forwarded. The path of the original request will be appended to the url property. Defaults to false.",
+            "type": "bool"
+          }
+        ]
+      }
+    ],
+    "config": {
+      "endpoint1": {
+        "name": "echoServer",
+        "path": "/test",
+        "url": "http://localhost:8000",
+        "paused": false,
+        "parallel": 2,
+        "updateTx": true,
+        "forwardMetadata": true
+      }
+    }
   }
 }
