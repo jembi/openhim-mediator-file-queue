@@ -3,7 +3,6 @@
 var fs = require('graceful-fs');
 var tap = require('tap');
 var rewire = require('rewire');
-var utils = require('../lib/utils');
 var testUtils = require('./test_utils');
 
 var index = rewire('../lib/index');
@@ -71,30 +70,6 @@ tap.test('should fail to find worker', function(t){
     t.notOk(findWorker(invalidConf));
     t.end();
   });
-});
-
-// ************************************************
-// tests for utils.js
-// ************************************************
-tap.test('should parse JSON object into array of objects', function(t){
-  var json = {
-    object1:{
-      name: "test1", 
-      purpose: "test1"
-    },
-    object2: {
-      name: "test2", 
-      purpose: "test2"
-    }
-  }
-
-  var result = utils.parseJSONIntoArray(json);
-
-  t.same(result, [
-    {name: "test1", purpose: "test1"},
-    {name: "test2", purpose: "test2"}
-  ]);
-  t.end();
 });
 
 // ************************************************

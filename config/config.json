@@ -29,10 +29,11 @@
     ],
     "configDefs": [
       {
-        "param": "endpoint1",
-        "displayName": "Endpoint1",
+        "param": "endpoints",
+        "displayName": "Endpoints",
         "description": "Configure File Queue endpoints",
         "type": "struct",
+        "array": true,
         "template": [
           {
             "param": "name",
@@ -80,15 +81,17 @@
       }
     ],
     "config": {
-      "endpoint1": {
-        "name": "echoServer",
-        "path": "/test",
-        "url": "http://localhost:8000",
-        "paused": false,
-        "parallel": 2,
-        "updateTx": true,
-        "forwardMetadata": true
-      }
+      "endpoints": [
+        {
+          "name": "echoServer",
+          "path": "/test",
+          "url": "http://localhost:8000",
+          "paused": false,
+          "parallel": 2,
+          "updateTx": true,
+          "forwardMetadata": true
+        }
+      ]
     }
   }
 }
