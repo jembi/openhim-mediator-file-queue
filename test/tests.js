@@ -3,10 +3,42 @@
 var fs = require('graceful-fs');
 var tap = require('tap');
 var rewire = require('rewire');
+var utils = require('../lib/utils');
+var testUtils = require('./test_utils');
 
 var index = rewire('../lib/index');
 var worker = rewire('../lib/worker');
 
+// commonly used variables
+var validConf = {
+  "name": "echoServer",
+  "url": "http://localhost:7000",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
+var invalidConf = {
+  "name": "invalidEnpoint",
+  "url": "http://localhost:7000",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
+var noUrlConf = {
+  "name": "echoServer",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
+// ************************************************
+// tests for index.js
+// ************************************************
 tap.test('should write metadata to file', function(t) {
   var req = {
     method: 'POST',
@@ -27,6 +59,47 @@ tap.test('should write metadata to file', function(t) {
   });
 });
 
+tap.test('should find worker', function(t){
+  testUtils.findWorker(function(findWorker){
+    t.ok(findWorker(validConf));
+    t.end();
+  });  
+});
+
+tap.test('should fail to find worker', function(t){
+  testUtils.findWorker(function(findWorker){
+    t.notOk(findWorker(invalidConf));
+    t.end();
+  });
+});
+
+// ************************************************
+// tests for utils.js
+// ************************************************
+tap.test('should parse JSON object into array of objects', function(t){
+  var json = {
+    object1:{
+      name: "test1", 
+      purpose: "test1"
+    },
+    object2: {
+      name: "test2", 
+      purpose: "test2"
+    }
+  }
+
+  var result = utils.parseJSONIntoArray(json);
+
+  t.same(result, [
+    {name: "test1", purpose: "test1"},
+    {name: "test2", purpose: "test2"}
+  ]);
+  t.end();
+});
+
+// ************************************************
+// tests for worker.js
+// ************************************************
 function setupTestFiles(bodyFile, metaFile) {
   fs.mkdirSync('test/from');
   fs.mkdirSync('test/to');
@@ -144,5 +217,37 @@ tap.test('delTx - should throw an error if body file doesnt exist', function(t) 
   delTx('xb58d4327b141ebffe6e990c.txt', 'test/from', false, function(err) {
     t.ok(err);
     t.end();
+  });
+});
+
+tap.test('should update worker config', function(t){
+  testUtils.setupWorker(function(workerObj){
+    workerObj.updateWorker(validConf, function(err){
+      t.notOk(err, "There were no errors");
+    });
+    t.same(workerObj.getOptions(), validConf, "The worker's config was successfully updated")
+    t.end()
+  });
+});
+
+tap.test('should fail to update worker config: no url', function(t){
+  testUtils.setupWorker(function(workerObj){  
+    workerObj.updateWorker(noUrlConf, function(err){
+      t.ok(err, "There were errors");
+    });
+    t.notSame(workerObj.getOptions(), noUrlConf, "The worker's config failed to be updated")
+    t.end()
+  });
+});
+
+tap.test('should fail to update worker config: undefined config', function(t){
+  testUtils.setupWorker(function(workerObj){
+    var newConf = undefined
+  
+    workerObj.updateWorker(newConf, function(err){
+      t.ok(err, "There were errors");
+    });
+    t.notSame(workerObj.getOptions(), newConf, "The worker's config failed to be updated")
+    t.end()
   });
 });
