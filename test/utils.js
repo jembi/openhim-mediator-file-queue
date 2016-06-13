@@ -5,6 +5,33 @@ var worker = require('../lib/worker');
 
 var index = rewire('../lib/index');
 
+// commonly used variables/objects
+exports.validConf = {
+  "name": "echoServer",
+  "url": "http://localhost:7000",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
+exports.invalidConf = {
+  "name": "invalidEnpoint",
+  "url": "http://localhost:7000",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
+exports.noUrlConf = {
+  "name": "echoServer",
+  "paused": false,
+  "parallel": 5,
+  "updateTx": true,
+  "forwardMetadata": false
+};
+
 function setupWorker(done){
   var config = {
       "name": "echoServer",

@@ -1,9 +1,10 @@
 {
   "port": 4002,
+  "host": "localhost",
   "log_level": "debug",
   "endpoints": [
     {
-      "name": "echoServer",
+      "name": "File Queue",
       "path": "/test",
       "url": "http://localhost:8000",
       "paused": false,
@@ -20,7 +21,7 @@
         "status": "enabled",
         "routes": [
           {
-            "name": "File queue",
+            "name": "File Queue",
             "host": "localhost",
             "path": "/test",
             "port": "4002",

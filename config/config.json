@@ -1,5 +1,6 @@
 {
   "port": 4003,
+  "host": "",
   "endpoints": [],
   "log_level": "info",
   "statsd": {

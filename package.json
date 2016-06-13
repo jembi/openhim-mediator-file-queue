@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "node lib",
-    "test": "tap --cov test/tests.js",
-    "coverage": "tap test/tests.js --cov --coverage-report=lcov"
+    "test": "tap --cov test/tests.js test/test_worker.js test/test_openhim.js",
+    "coverage": "tap test/tests.js test/test_worker.js test/test_openhim.js --cov --coverage-report=lcov"
   },
   "bin": {
     "file-queue": "lib/index.js"
