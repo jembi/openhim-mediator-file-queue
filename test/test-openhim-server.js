@@ -4,6 +4,7 @@
 
 const http = require('http')
 const URL = require('url')
+const testUtils = require('./utils');
 
 const response = [{
   _id: '575946b94a20db7a4e071ae4',
@@ -44,6 +45,12 @@ const server = http.createServer(function (req, res) {
         ts: new Date(),
         salt: '123'
       }))
+    } else if (url.path === '/mediators') {
+      res.writeHead(201)
+      res.end()
+    }else if (url.path === '/mediators/urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33/heartbeat') {
+      res.writeHead(200)
+      res.end(JSON.stringify(testUtils.validMediatorConf))
     } else {
       console.log('Error: no path matched')
       res.writeHead(500)

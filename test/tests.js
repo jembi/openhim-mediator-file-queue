@@ -11,14 +11,14 @@ var Express = require('express');
 var Confit = require('confit');
 var Path = require('path');
 var Winston = require('winston');
+const request = require('request')
 
-var index = rewire('../lib/index');
+var setupEndpoint = rewire('../lib/setupEndpoint');
 
 const opts = {
   username: 'root@openhim.org',
   password: 'password',
-  apiURL: 'http://localhost:8080',
-  urn: "urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33",
+  apiURL: 'http://localhost:8080'
 }
 
 // ************************************************
@@ -33,7 +33,7 @@ tap.test('should write metadata to file', function(t) {
       header2: 'val2'
     }
   };
-  var writeMetadata = index.__get__('writeMetadata');
+  var writeMetadata = setupEndpoint.__get__('writeMetadata');
   writeMetadata('test123.json', 'test', req, function(err) {
     t.error(err);
     var file = fs.readFileSync('test/test123-metadata.json', 'utf-8');
@@ -45,7 +45,7 @@ tap.test('should write metadata to file', function(t) {
 });
 
 tap.tearDown(function(){
-  index.__set__('WorkerInstances', []);
+  setupEndpoint.__set__('WorkerInstances', []);
 })
 
 tap.test('should find worker', function(t){
@@ -60,45 +60,4 @@ tap.test('should fail to find worker', function(t){
     t.notOk(findWorker(testUtils.invalidConf));
     t.end();
   });
-});
-
-// tap.test('should setup endpoint', function(t){
-//   let openhim = OpenHIM(opts)
-//   var config = []
-//   config.push(testUtils.validConf)
-
-//   testServer.start(() => {
-//     var fqApp = index.__get__('app');
-    
-//     Confit(Path.join(__dirname, '..', 'config')).create(function(err, config) {
-//       Object.defineProperty(fqApp.locals, 'config', {value: config});
-
-//       fqApp.listen(4002, function(){
-//         var updateEndpointConfig = index.__get__('updateEndpointConfig')
-
-//         Winston.info('hello');
-//         // updateEndpointConfig(config, opts, testUtils.validConf, function(err){
-//           // Winston.info(w);
-//         //   t.ok(err)
-//         //   t.end()
-//         // });  
-//         t.pass()
-//         t.end()
-//       })
-//     })
-//   })
-// });
-
-// ************************************************
-// tests for utils.js
-// ************************************************
-tap.test('should parse URL', function(t){
-  var result = utils.parseUrl("http://example.com:3000/pathname/?search=test#hash")
-
-  t.equal(result.protocol, "http:")
-  t.equal(result.host, "example.com:3000")
-  t.equal(result.hostname, "example.com")
-  t.equal(result.port, "3000")
-  t.equal(result.path, "/pathname/")
-  t.end()
 });
