@@ -1,5 +1,6 @@
 {
   "port": 4003,
+  "heartbeat": true,
   "host": "",
   "endpoints": [],
   "log_level": "info",

@@ -6,17 +6,19 @@ var worker = require('../lib/worker');
 var setupEndpoint = rewire('../lib/setupEndpoint');
 
 // commonly used variables/objects
-exports.validConf = {
-  "name": "echoServer",
-  "url": "http://localhost:7000",
+const validConf = {
+  "name": "Test Upstream",
+  "path": "/test",
+  "url": "http://localhost:8000",
   "paused": false,
   "parallel": 5,
   "updateTx": true,
   "forwardMetadata": false
 };
+exports.validConf = validConf
 
 exports.invalidConf = {
-  "name": "invalidEnpoint",
+  "name": "invalidEndpoint",
   "url": "http://localhost:7000",
   "paused": false,
   "parallel": 5,
@@ -65,16 +67,7 @@ exports.validMediatorConf = {
 }
 
 function setupWorker(done){
-  var config = {
-      "name": "echoServer",
-      "path": "/test",
-      "url": "http://localhost:8000",
-      "paused": false,
-      "parallel": 2,
-      "updateTx": true,
-      "forwardMetadata": true
-    };
-  var newWorker = new worker(config);
+  var newWorker = new worker(validConf);
   done(newWorker);
 };
 

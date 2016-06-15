@@ -2,9 +2,11 @@
 
 'use strict'
 
+var enableDestroy = require('server-graceful-shutdown')
 const http = require('http')
 const URL = require('url')
-const testUtils = require('./utils');
+const testUtils = require('./utils')
+var Winston = require('winston')
 
 const response = [{
   _id: '575946b94a20db7a4e071ae4',
@@ -30,8 +32,8 @@ const server = http.createServer(function (req, res) {
     body += chunk.toString()
   })
   req.on('end', function () {
-    console.log(`Received ${req.method} request to ${req.url}`)
-    console.log(`with body: ${body}`)
+    Winston.info(`Received ${req.method} request to ${req.url}`)
+    Winston.info(`with body: ${body}`)
     let url = URL.parse(req.url)
     if (url.path === '/channels') {
       res.writeHead(200)
@@ -50,9 +52,14 @@ const server = http.createServer(function (req, res) {
       res.end()
     }else if (url.path === '/mediators/urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33/heartbeat') {
       res.writeHead(200)
-      res.end(JSON.stringify(testUtils.validMediatorConf))
+      var endpoints = []
+      endpoints.push(testUtils.validConf)
+      var endPointConf = {
+        endpoints: endpoints
+      }
+      res.end(JSON.stringify(endPointConf))
     } else {
-      console.log('Error: no path matched')
+      Winston.info('Error: no path matched')
       res.writeHead(500)
       res.end()
     }
@@ -60,19 +67,22 @@ const server = http.createServer(function (req, res) {
 })
 
 function start (callback) {
-  server.listen(8080, function (msg) {
-    console.log(msg)
+  server.setTimeout(2000)
+  server.listen(7070, function () {
+    Winston.info('Listening on 7070')
     callback()
   })
+
+  enableDestroy(server)
 }
 exports.start = start
 
 function stop (callback) {
-  server.close(callback)
+  server.shutdown(callback)
 }
 exports.stop = stop
 
 if (!module.parent) {
   // if this script is run directly, start the server
-  start(() => console.log('OpenHIM Server listening on 8080...'))
+  start('first time',() => {Winston.info('OpenHIM Server listening on 7070...')})
 }

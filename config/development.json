@@ -1,6 +1,5 @@
 {
   "port": 4002,
-  "host": "localhost",
   "log_level": "debug",
   "endpoints": [
     {
@@ -12,26 +11,5 @@
       "updateTx": true,
       "forwardMetadata": true
     }
-  ],
-  "mediatorConf": {
-    "defaultChannelConfig": [
-      {
-        "name": "File Queue",
-        "urlPattern": "^/test$",
-        "status": "enabled",
-        "routes": [
-          {
-            "name": "File Queue",
-            "host": "localhost",
-            "path": "/test",
-            "port": "4002",
-            "secured": false,
-            "primary": true,
-            "type": "http"
-          }
-        ],
-        "authType": "public"
-      }
-    ]
-  }
+  ]
 }

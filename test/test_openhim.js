@@ -13,7 +13,7 @@ console.error = () => {}
 const opts = {
   username: 'root@openhim.org',
   password: 'password',
-  apiURL: 'http://localhost:8080'
+  apiURL: 'http://localhost:7070'
 }
 
 const badOpts = {
