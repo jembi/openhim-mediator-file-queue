@@ -25,6 +25,7 @@ const opts = {
   apiURL: 'http://localhost:8080'
 }
 
+// these two methods are used to updated (and reverse update) the config with test relevant settings
 function readWriteSync(filename) {
   var data = fs.readFileSync(filename, 'utf-8')
   
@@ -34,7 +35,6 @@ function readWriteSync(filename) {
   Winston.info(JSON.stringify(configJson.api) + ' ' + configJson.heartbeat);
   var newValue = JSON.stringify(configJson, null, 2)
 
-  //Winston.info(newValue)
   fs.writeFileSync(filename, newValue, 'utf-8')
 
   Winston.info('config file updated for testing')
@@ -141,35 +141,3 @@ tap.test('should send file upstream', function(t){
     })
   })
 });
-
-
-// tap.test('should send file upstream', function(t){
-//   testServer.start(() => {
-//     testUpstreamServer.start(() => {
-//       // update test config to point to test server
-//       // readWriteSync('config/config.json')
-
-//       index.start((res) => {
-//         const options = {
-//           url: 'http://root:password@localhost:4002/test',
-//           body: "This is a test"
-//         }
-//         t.ok(res)
-//         request.post(options, (err, res) => {
-//           Winston.info(res.response)
-//           t.ok(res)
-//           index.stop(() => {
-//             Winston.info('index stopped')
-//             testUpstreamServer.stop(() => {
-//               testServer.stop(() => {
-//                 resetConfigFile('config/config.json')
-//                 t.end()
-//                 index.forceStop()
-//               })
-//             })
-//           })
-//         })
-//       })
-//     })
-//   })
-// });
