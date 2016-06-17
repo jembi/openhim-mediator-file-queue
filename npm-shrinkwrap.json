@@ -1964,6 +1964,11 @@
       "from": "semver@>=5.1.0 <6.0.0",
       "resolved": "https://registry.npmjs.org/semver/-/semver-5.1.0.tgz"
     },
+    "server-graceful-shutdown": {
+      "version": "0.1.2",
+      "from": "server-graceful-shutdown@>=0.1.2 <0.2.0",
+      "resolved": "https://registry.npmjs.org/server-graceful-shutdown/-/server-graceful-shutdown-0.1.2.tgz"
+    },
     "signal-exit": {
       "version": "2.1.2",
       "from": "signal-exit@>=2.0.0 <3.0.0",
