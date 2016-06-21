@@ -1,99 +1,99 @@
-'use strict'
+'use strict';
 
-const tap = require('tap')
-const testServer = require('./test-openhim-server')
+const tap = require('tap');
+const testServer = require('./test-openhim-server');
 const testUtils = require('./utils');
 const URL = require('url');
-const OpenHIM = require('../lib/openhim.js')
+const OpenHIM = require('../lib/openhim.js');
 
 // don't log during tests - comment these out for debugging
-console.log = () => {}
-console.error = () => {}
+console.log = () => {};
+console.error = () => {};
 
 const opts = {
   username: 'root@openhim.org',
   password: 'password',
   apiURL: 'http://localhost:7070'
-}
+};
 
 const badOpts = {
   username: 'root@openhim.org',
   password: 'password',
   apiURL: 'http://localhost:1337'
-}
+};
 
 tap.test('OpenHIM module - fetchChannelByName()', (t) => {
-  let openhim = OpenHIM(opts)
+  let openhim = OpenHIM(opts);
   testServer.start(() => {
     openhim.fetchChannelByName('Test Channel', (err, channel) => {
-      t.error(err)
-      t.ok(channel)
-      t.equals(channel._id, '575946b94a20db7a4e071ae4')
+      t.error(err);
+      t.ok(channel);
+      t.equals(channel._id, '575946b94a20db7a4e071ae4');
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - fetchChannelByName() error case', (t) => {
-  let openhim = OpenHIM(badOpts)
+  let openhim = OpenHIM(badOpts);
   testServer.start(() => {
-    openhim.fetchChannelByName('Test Channel', (err, channel) => {
-      t.ok(err)
-      t.match(err.message, 'ECONNREFUSED')
+    openhim.fetchChannelByName('Test Channel', (err) => {
+      t.ok(err);
+      t.match(err.message, 'ECONNREFUSED');
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - fetchChannelByName() no results case', (t) => {
-  let openhim = OpenHIM(opts)
+  let openhim = OpenHIM(opts);
   testServer.start(() => {
-    openhim.fetchChannelByName('nonexistent', (err, channel) => {
-      t.ok(err)
-      t.equals(err.message, 'Could not find channel in result set')
+    openhim.fetchChannelByName('nonexistent', (err) => {
+      t.ok(err);
+      t.equals(err.message, 'Could not find channel in result set');
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - updateChannel()', (t) => {
-  let openhim = OpenHIM(opts)
+  let openhim = OpenHIM(opts);
   testServer.start(() => {
     openhim.updateChannel('575946b94a20db7a4e071ae4', {}, (err) => {
-      t.error(err)
+      t.error(err);
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - updateChannel() error case', (t) => {
-  let openhim = OpenHIM(badOpts)
+  let openhim = OpenHIM(badOpts);
   testServer.start(() => {
     openhim.updateChannel('575946b94a20db7a4e071ae4', {}, (err) => {
-      t.ok(err)
-      t.match(err.message, 'ECONNREFUSED')
+      t.ok(err);
+      t.match(err.message, 'ECONNREFUSED');
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - addChannel()', (t) => {
-  let openhim = OpenHIM(opts)
+  let openhim = OpenHIM(opts);
 
   var endpointChannel = {
     name: testUtils.validConf.name,
     urlPattern: '^' + testUtils.validConf.path + '$',
-    status: "enabled",
+    status: 'enabled',
     routes: [
       {
         name: testUtils.validConf.name,
@@ -104,28 +104,28 @@ tap.test('OpenHIM module - addChannel()', (t) => {
         primary: true
       }
     ],
-    authType: "public"
+    authType: 'public'
   };
 
   testServer.start(() => {
     openhim.addChannel(endpointChannel, (err) => {
-      t.error(err)
+      t.error(err);
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});
 
 tap.test('OpenHIM module - addChannel() error case', (t) => {
-  let openhim = OpenHIM(badOpts)
+  let openhim = OpenHIM(badOpts);
   testServer.start(() => {
     openhim.addChannel({}, (err) => {
-      t.ok(err)
-      t.match(err.message, 'ECONNREFUSED')
+      t.ok(err);
+      t.match(err.message, 'ECONNREFUSED');
       testServer.stop(() => {
-        t.end()
-      })
-    })
-  })
-})
+        t.end();
+      });
+    });
+  });
+});

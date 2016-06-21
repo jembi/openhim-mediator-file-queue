@@ -3,54 +3,41 @@
 const fs = require('graceful-fs');
 const tap = require('tap');
 const rewire = require('rewire');
-const utils = require('../lib/utils');
 const testUtils = require('./utils');
 const testServer = require('./test-openhim-server');
 const testUpstreamServer = require('./test-upstream-server');
-const OpenHIM = require('../lib/openhim.js');
-const Express = require('express');
-const Confit = require('confit');
-const Path = require('path');
 const Winston = require('winston');
 const request = require('request');
-const ConfigHandler = require('../lib/configHandler');
-const mutils = require('openhim-mediator-utils')
 
-var index = null
+var index = null;
 var setupEndpoint = rewire('../lib/setupEndpoint');
 
-const opts = {
-  username: 'root@openhim.org',
-  password: 'password',
-  apiURL: 'http://localhost:8080'
-}
-
 // this forces the use of the test config file
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 
 function beforeEach(callback) {
-  index = rewire('../lib/index')
+  index = rewire('../lib/index');
   testServer.start(() => {
     testUpstreamServer.start(() => {
-      Winston.info('Test servers started...')
-      callback()
-    })
-  })
+      Winston.info('Test servers started...');
+      callback();
+    });
+  });
 }
 
 function cleanUp(callback){
-  Winston.info('teardown')
-  setupEndpoint.__set__('WorkerInstances', [])
+  Winston.info('teardown');
+  setupEndpoint.__set__('WorkerInstances', []);
   setupEndpoint.destroyWorkers(() => {
     // Shutdown servers
     testUpstreamServer.stop(() => {
       testServer.stop(() => {
-        Winston.info('Test servers stopped')
-        callback()
-      })
-    })
-  })
-  index = null
+        Winston.info('Test servers stopped');
+        callback();
+      });
+    });
+  });
+  index = null;
 }
 
 // ************************************************
@@ -92,59 +79,59 @@ tap.test('should fail to find worker', function(t){
 
 tap.test('should send file upstream', function(t){
   beforeEach(() => {
-    t.plan(3)
+    t.plan(3);
     index.start((res) => {
-      Winston.info(res)
+      Winston.info(res);
       const options = {
         url: 'http://root:password@localhost:4002/test',
-        body: "This is a test"
-      }
-      t.ok(res)
+        body: 'This is a test'
+      };
+      t.ok(res);
       setTimeout(function() {
         request.post(options, (err, res) => {
-          Winston.info(res.body)
-          Winston.info(res.statusCode)
-          t.equal(res.statusCode, 202)
+          Winston.info(res.body);
+          Winston.info(res.statusCode);
+          t.equal(res.statusCode, 202);
           setTimeout(function() {
             index.stop(() => {
 
               cleanUp(() => {
-                t.pass()
-                t.end()
-              })
-            })  
-          }, 2000)
-        })
-      }, 2000)
-    })
-  })
+                t.pass();
+                t.end();
+              });
+            });
+          }, 2000);
+        });
+      }, 2000);
+    });
+  });
 });
 
 tap.test('should fail to send file upstream mediator config', function(t){
   beforeEach(() => {
-    t.plan(3)
+    t.plan(3);
     index.start((res) => {
-      Winston.info(res)
+      Winston.info(res);
       const options = {
         url: 'http://root:password@localhost:4002/invalidPath',
-        body: "This is a test"
-      }
-      t.ok(res)
+        body: 'This is a test'
+      };
+      t.ok(res);
       setTimeout(function() {
         request.post(options, (err, res) => {
-          Winston.info(res.body)
-          Winston.info(res.statusCode)
-          t.equal(res.statusCode, 404)
+          Winston.info(res.body);
+          Winston.info(res.statusCode);
+          t.equal(res.statusCode, 404);
           setTimeout(function() {
             index.stop(() => {
               cleanUp(() => {
-                t.pass()
-                t.end()
-              })
-            })  
-          }, 2000)
-        })
-      }, 2000)
-    })
-  })
+                t.pass();
+                t.end();
+              });
+            });
+          }, 2000);
+        });
+      }, 2000);
+    });
+  });
 });

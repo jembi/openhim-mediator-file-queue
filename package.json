@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node lib",
-    "test": "tap --cov test/tests.js test/test_worker.js test/test_openhim.js",
+    "test": "tap --cov test/tests.js test/test_worker.js test/test_openhim.js && jshint **/*.js",
     "coverage": "tap test/tests.js test/test_worker.js test/test_openhim.js --cov --coverage-report=lcov"
   },
   "bin": {
@@ -52,6 +52,7 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
+    "jshint": "^2.9.2",
     "rewire": "^2.5.1",
     "tap": "^2.3.4"
   }

@@ -2,7 +2,7 @@
   "port": 4002,
   "heartbeat": false,
   "record_stats": false,
-  "log_level": "debug",
+  "log_level": "error",
   "endpoints": [
     {
       "name": "File Queue",

@@ -133,31 +133,31 @@ tap.test('delTx - should throw an error if body file doesnt exist', function(t) 
 tap.test('should update worker config', function(t){
   testUtils.setupWorker(function(workerObj){
     workerObj.updateWorker(testUtils.validConf, function(err){
-      t.notOk(err, "There were no errors");
+      t.notOk(err, 'There were no errors');
     });
-    t.same(workerObj.getOptions(), testUtils.validConf, "The worker's config was successfully updated")
-    t.end()
+    t.same(workerObj.getOptions(), testUtils.validConf, 'The worker\'s config was successfully updated');
+    t.end();
   });
 });
 
 tap.test('should fail to update worker config: no url', function(t){
   testUtils.setupWorker(function(workerObj){  
     workerObj.updateWorker(testUtils.noUrlConf, function(err){
-      t.ok(err, "There were errors");
+      t.ok(err, 'There were errors');
     });
-    t.notSame(workerObj.getOptions(), testUtils.noUrlConf, "The worker's config failed to be updated")
-    t.end()
+    t.notSame(workerObj.getOptions(), testUtils.noUrlConf, 'The worker\'s config failed to be updated');
+    t.end();
   });
 });
 
 tap.test('should fail to update worker config: undefined config', function(t){
   testUtils.setupWorker(function(workerObj){
-    var newConf = undefined
+    var newConf;
   
     workerObj.updateWorker(newConf, function(err){
-      t.ok(err, "There were errors");
+      t.ok(err, 'There were errors');
     });
-    t.notSame(workerObj.getOptions(), newConf, "The worker's config failed to be updated")
-    t.end()
+    t.notSame(workerObj.getOptions(), newConf, 'The worker\'s config failed to be updated');
+    t.end();
   });
 });
