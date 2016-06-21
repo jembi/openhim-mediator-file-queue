@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "node lib",
-    "test": "tap --cov test/tests.js",
-    "coverage": "tap test/tests.js --cov --coverage-report=lcov"
+    "test": "tap --cov test/tests.js test/test_worker.js test/test_openhim.js && jshint **/*.js",
+    "coverage": "tap test/tests.js test/test_worker.js test/test_openhim.js --cov --coverage-report=lcov"
   },
   "bin": {
     "file-queue": "lib/index.js"
@@ -27,12 +27,15 @@
     "body-parser": "^1.10.2",
     "confit": "^2.0.3",
     "express": "^4.11.1",
+    "express-remove-route": "^0.1.1",
     "graceful-fs": "^4.1.2",
+    "latest-version": "^2.0.0",
     "mkdirp": "^0.5.0",
     "needle": "^0.10.0",
     "node-statsd": "^0.1.1",
     "on-finished": "^2.2.0",
     "openhim-mediator-utils": "^0.2.2",
+    "server-graceful-shutdown": "^0.1.2",
     "type-is": "^1.5.5",
     "winston": "^1.0.1"
   },
@@ -49,7 +52,8 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
+    "jshint": "^2.9.2",
     "rewire": "^2.5.1",
-    "tap": "^2.3.2"
+    "tap": "^2.3.4"
   }
 }
