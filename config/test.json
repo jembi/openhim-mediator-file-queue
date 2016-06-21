@@ -1,7 +1,7 @@
 {
   "port": 4002,
-  "heartbeat": true,
-  "record_stats": true,
+  "heartbeat": false,
+  "record_stats": false,
   "log_level": "debug",
   "endpoints": [
     {
@@ -15,12 +15,9 @@
     }
   ],
   "api": {
-    "apiURL": "https://localhost:8080",
+    "apiURL": "http://localhost:7070",
     "username": "root@openhim.org",
     "password": "password"
   },
-  "statsd": {
-    "host": "localhost",
-    "port": 8125
-  }
+  "statsd": {}
 }

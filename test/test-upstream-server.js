@@ -11,9 +11,9 @@ const server = http.createServer(function(request,response){
   console.log('Server 8000: Request Received...')
   response.writeHead(200)
   request.pipe(response)
-  request.end()
+  // request.end()
   console.log('Server 8000: Request echoed back to client...')
-  response.end()
+  // response.end()
 })
 
 function start(callback) {
@@ -28,6 +28,7 @@ function start(callback) {
 exports.start = start
 
 function stop (callback) {
+  Winston.info('Upstream stopped')
   server.shutdown(callback)
 }
 exports.stop = stop

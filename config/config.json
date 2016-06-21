@@ -4,14 +4,9 @@
   "host": "",
   "endpoints": [],
   "log_level": "info",
-  "statsd": {
-    "host": "localhost",
-    "port": 8125
-  },
+  "statsd": {},
   "api": {
-    "apiURL": "https://localhost:8080",
-    "username": "root@openhim.org",
-    "password": "password"
+    "apiURL": "https://localhost:8080"
   },
   "mediatorConf": {
     "urn": "urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33",
@@ -51,7 +46,7 @@
           },
           {
             "param": "url",
-            "displayName": "URL",
+            "displayName": "Upstream URL",
             "description": "The URL to send the files to when processing them from the queue.",
             "type": "string"
           },

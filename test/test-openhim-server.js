@@ -79,6 +79,7 @@ exports.start = start
 
 function stop (callback) {
   server.shutdown(callback)
+  Winston.info('OpenHim stopped')
 }
 exports.stop = stop
 
