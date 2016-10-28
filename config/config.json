@@ -73,6 +73,12 @@
             "displayName": "ForwardMetadata",
             "description": "Whether or not to use the url, headers and HTTP method of the original request when it is forwarded. The path of the original request will be appended to the url property.",
             "type": "bool"
+          },
+          {
+            "param": "disableAutoChannelManagement",
+            "displayName": "Disable auto channel managment",
+            "description": "If disabled, the mediator won't automatically create and update channels as endpoint config is updated.",
+            "type": "bool"
           }
         ]
       }
@@ -86,7 +92,8 @@
           "paused": false,
           "parallel": 2,
           "updateTx": true,
-          "forwardMetadata": true
+          "forwardMetadata": true,
+          "disableAutoChannelManagement": false
         }
       ]
     }
