@@ -4,7 +4,7 @@ set -e
 
 if [ -z $1 ]
 then
-  echo "Usage: $0 <worker_id>"
+  echo "Usage: $0 <worker-name>"
   exit 1
 fi
 
