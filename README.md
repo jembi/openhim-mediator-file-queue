@@ -25,6 +25,16 @@ The file queue simply handles incoming requests, writing the files to a director
 
 Multiple "endpoints" can be configured. Each endpoint handles incoming requests for a specific URL, queues them, and then sends them to another configured URL. An endpoint has a "worker" which is responsible for reading the files from the queue and processing them. Workers can process multiple files in parallel as configured (by default 2 at a time). Workers can be paused/unpaused or repopulated via a RESTlike endpoint. Pausing a worker will stop it from processing files from the queue, but the endpoint will continue accepting requests and writing the files to the queue. Repopulating a worker will cause it to refresh its queue from the files on the filesystem. This is useful when manually adding files to or removing files from the queue.
 
+To pause a queue:
+`./scripts/pause.sh <worker-id>`
+
+To resume a queue:
+`./scripts/resume.sh <worker-id>`
+
+To repopulate a queue:
+`mv ./error/<worker-id>/* ./queue/<worker-id>/`
+`./scripts/repopulate.sh <worker-id>`
+
 Each "endpoint" must have a matching channel and route registered in OpenHIM, for receiving requests and forwarding them to the file queue mediator. When the mediator starts up a new channel will automatically be created/updated based off the settings for the upstream server (where the files will be forwarded to). Note the the channel will be updated each time the endpoint settings are updated.
 
 Please note that the following manual steps might be required to get the File Queue to function correctly:
