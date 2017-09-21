@@ -1,6 +1,6 @@
 {
   "name": "openhim-mediator-file-queue",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
