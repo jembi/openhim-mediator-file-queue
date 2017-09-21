@@ -10,7 +10,7 @@
   },
   "mediatorConf": {
     "urn": "urn:uuid:a15c3d48-0686-4c9b-b375-f68d2f244a33",
-    "version": "2.0.2",
+    "version": "3.0.0",
     "name": "file-queue",
     "description": "Async file queue mediator for the OpenHIM",
     "defaultChannelConfig": [],
