@@ -1,6 +1,6 @@
 {
   "name": "openhim-mediator-file-queue",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -501,9 +501,9 @@
       "integrity": "sha1-skbCuApXCkfBG+HZvRBw7IeLh84="
     },
     "deep-extend": {
-      "version": "0.4.2",
-      "resolved": "https://registry.npmjs.org/deep-extend/-/deep-extend-0.4.2.tgz",
-      "integrity": "sha1-SLaZwn4zS/ifEIkr5DL25MfTSn8="
+      "version": "0.6.0",
+      "resolved": "https://registry.npmjs.org/deep-extend/-/deep-extend-0.6.0.tgz",
+      "integrity": "sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA=="
     },
     "defined": {
       "version": "0.0.0",
@@ -1144,9 +1144,9 @@
       "integrity": "sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE="
     },
     "ini": {
-      "version": "1.3.4",
-      "resolved": "https://registry.npmjs.org/ini/-/ini-1.3.4.tgz",
-      "integrity": "sha1-BTfLedr1m1mhpRff9wbIbsA5Fi4="
+      "version": "1.3.5",
+      "resolved": "https://registry.npmjs.org/ini/-/ini-1.3.5.tgz",
+      "integrity": "sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw=="
     },
     "ipaddr.js": {
       "version": "1.8.0",
@@ -4780,14 +4780,21 @@
       }
     },
     "rc": {
-      "version": "1.1.6",
-      "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.6.tgz",
-      "integrity": "sha1-Q2UbdrauU7XIAvEVH6P8OwWZack=",
+      "version": "1.2.8",
+      "resolved": "https://registry.npmjs.org/rc/-/rc-1.2.8.tgz",
+      "integrity": "sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==",
       "requires": {
-        "deep-extend": "~0.4.0",
+        "deep-extend": "^0.6.0",
         "ini": "~1.3.0",
         "minimist": "^1.2.0",
-        "strip-json-comments": "~1.0.4"
+        "strip-json-comments": "~2.0.1"
+      },
+      "dependencies": {
+        "strip-json-comments": {
+          "version": "2.0.1",
+          "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz",
+          "integrity": "sha1-PFMZQukIwml8DsNEhYwobHygpgo="
+        }
       }
     },
     "read-all-stream": {
@@ -5255,7 +5262,8 @@
     "strip-json-comments": {
       "version": "1.0.4",
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz",
-      "integrity": "sha1-HhX7ysl9Pumb8tc7TGVrCCu6+5E="
+      "integrity": "sha1-HhX7ysl9Pumb8tc7TGVrCCu6+5E=",
+      "dev": true
     },
     "tap": {
       "version": "12.0.1",
