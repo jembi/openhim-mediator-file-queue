@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . /opt/openhim-mediator-file-queue
 
-CMD npm start
+CMD ["npm", "start"]
