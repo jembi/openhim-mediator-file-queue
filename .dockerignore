@@ -1,0 +1,12 @@
+config/test.json
+file-queue.gif
+.git/
+.travis.yml
+.jshintrc
+.jshintignore
+.gitignore
+node_modules/
+test/
+error/
+queue/
+working/
