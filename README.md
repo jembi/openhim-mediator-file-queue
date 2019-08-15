@@ -111,7 +111,7 @@ docker build -t openhim-mediator-file-queue .
 Start container:
 
 ```sh
-docker run --name file-queue -p 4002:4002 file-queue
+docker run --name openhim-mediator-file-queue -p 4002:4002 openhim-mediator-file-queue
 ```
 
 Useful Flags:
