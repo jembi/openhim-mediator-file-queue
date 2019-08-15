@@ -105,7 +105,7 @@ Here is an example config file:
 Build container from project directory:
 
 ```sh
-docker build -t file-queue .
+docker build -t openhim-mediator-file-queue .
 ```
 
 Start container:
