@@ -95,3 +95,27 @@ Here is an example config file:
   ]
 }
 ```
+
+## Development Startup
+
+### Docker
+
+> If connecting to a dockerised OpeHIM instance, change the host reference in the `/config/production.json` file to the OpenHIM's docker container name.
+
+Build container from project directory:
+
+```sh
+docker build -t openhim-mediator-file-queue .
+```
+
+Start container:
+
+```sh
+docker run --name openhim-mediator-file-queue -p 4002:4002 openhim-mediator-file-queue
+```
+
+Useful Flags:
+
+* `--network {openhim-network-name}` connect to a docker bridge network to allow communicating with dockerised OpenHIM
+* `--rm` to remove the container when stopped (Useful during development)
+* `-e NODE_TLS_REJECT_UNAUTHORIZED=0` if the using an OpenHIM instance with self signed certificates
