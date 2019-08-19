@@ -4,7 +4,6 @@
   "host": "",
   "endpoints": [],
   "log_level": "info",
-  "statsd": {},
   "api": {
     "apiURL": "https://localhost:8080"
   },
