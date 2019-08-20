@@ -20,17 +20,6 @@ process.env.LOG_LEVEL = 'error';
 process.env.API_URL = 'http://localhost:7070';
 process.env.API_USERNAME = 'root@openhim.org';
 process.env.API_PASSWORD = 'password';
-process.env.ENDPOINTS = [
-  {
-    name : 'File Queue',
-    path : '/test',
-    url : 'http://localhost:8000',
-    paused : false,
-    parallel : 2,
-    updateTx : true,
-    forwardMetadata : true
-  }
-];
 
 function beforeEach(callback) {
   index = rewire('../lib/index');
