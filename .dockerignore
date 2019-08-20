@@ -1,5 +1,7 @@
-config/test.json
+file-queue-add-endpoint.png
+file-queue-mediator-console-config.png
 file-queue.gif
+.travis.yml
 .git/
 .travis.yml
 .jshintrc
