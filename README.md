@@ -85,7 +85,7 @@ Here is an example config file:
 ```js
 {
   "port": 4002,
-  "log_level": "info",
+  "logLevel": "info",
   "endpoints": [
     {
       "name": "test",
