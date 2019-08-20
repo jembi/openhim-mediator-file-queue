@@ -1,10 +1,10 @@
 # Openhim Mediator File queue
 
-For development purposes, in order to communicate to the OpenHIM core, since it uses self-signed certificates, execute:
+## Introduction
 
-```sh
-NODE_TLS_REJECT_UNAUTHORIZED=0 npm start
-```
+The function of the file queue is to store requests from a client and send them through to an endpoint at a pace that the endpoint can handle. This rate could be determined by the network speed, the endpoint's computational resources or the endpoints accessibility. The file queue is a service that makes use of the OpenHIM Mediator framework.
+
+If the a clients request fails to make it to the endpoint the file-queue stores the request as a file in an error directory. This is very useful for an unreliable network or endpoint system.
 
 See this visual example of how this works as an OpenHIM mediator. Note the curl commands return instantly but the mediator knows to tell the OpenHIM that these are still processing and updates them after they complete asynchronously.
 
@@ -79,6 +79,23 @@ Here is an endpoint config example :
 ![File Queue OpenHIM Console Endpoint Options](./file-queue-add-endpoint.png)
 
 ## Development Startup
+
+### Node & NPM
+
+```sh
+npm start
+```
+
+Useful environment flags:
+
+* API_PASSWORD=password
+* API_USERNAME=root@openhim.org
+* API_URL=https://localhost:8080
+* HEARTBEAT=true
+* LOG_LEVEL=info
+* NODE_TLS_REJECT_UNAUTHORIZED=0
+* SERVER_PORT=4003
+* TRUST_SELF_SIGNED=true
 
 ### Docker
 
