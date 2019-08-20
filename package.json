@@ -28,12 +28,10 @@
     "express": "^4.16.3",
     "express-remove-route": "^0.1.1",
     "graceful-fs": "^4.1.11",
-    "latest-version": "^2.0.0",
     "mkdirp": "^0.5.0",
     "needle": "^0.10.0",
     "openhim-mediator-utils": "^0.2.3",
     "server-graceful-shutdown": "^0.1.2",
-    "spawn-wrap": "^1.4.2",
     "type-is": "^1.6.16",
     "winston": "^1.1.2"
   },
