@@ -6,10 +6,6 @@ const testUtils = require('./utils');
 const URL = require('url');
 const OpenHIM = require('../lib/openhim.js');
 
-// don't log during tests - comment these out for debugging
-console.log = () => {};
-console.error = () => {};
-
 const opts = {
   username: 'root@openhim.org',
   password: 'password',

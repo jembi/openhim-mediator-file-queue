@@ -14,6 +14,12 @@ var setupEndpoint = rewire('../lib/setupEndpoint');
 
 // this forces the use of the test config file
 process.env.NODE_ENV = 'test';
+process.env.SERVER_PORT = 4002;
+process.env.HEARTBEAT = false;
+process.env.LOG_LEVEL = 'error';
+process.env.API_URL = 'http://localhost:7070';
+process.env.API_USERNAME = 'root@openhim.org';
+process.env.API_PASSWORD = 'password';
 
 function beforeEach(callback) {
   index = rewire('../lib/index');
@@ -67,7 +73,7 @@ tap.test('should find worker', function(t){
   testUtils.findWorker(function(findWorker){
     t.ok(findWorker(testUtils.validConf));
     t.end();
-  });  
+  });
 });
 
 tap.test('should fail to find worker', function(t){
