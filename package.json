@@ -50,6 +50,6 @@
   "devDependencies": {
     "jshint": "^2.9.2",
     "rewire": "^2.5.2",
-    "tap": "^14.6.1"
+    "tap": "^12.6.5"
   }
 }
