@@ -1,4 +1,4 @@
-FROM node:dubnium-alpine
+FROM node:dubnium
 
 WORKDIR /opt/openhim-mediator-file-queue
 
