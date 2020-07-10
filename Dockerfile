@@ -2,7 +2,7 @@ FROM node:dubnium
 
 WORKDIR /opt/openhim-mediator-file-queue
 
-COPY package.json npm-shrinkwrap.json ./
+COPY package.json package-lock.json ./
 
 RUN npm install
 
