@@ -90,11 +90,11 @@ Useful environment flags:
 
 * API_PASSWORD=password
 * API_USERNAME=root@openhim.org
-* API_URL=https://localhost:8080
+* API_URL=<https://localhost:8080>
 * HEARTBEAT=true
 * LOG_LEVEL=info
 * NODE_TLS_REJECT_UNAUTHORIZED=0
-* SERVER_PORT=4003
+* SERVER_PORT=4002
 * TRUST_SELF_SIGNED=true
 
 ### Docker
