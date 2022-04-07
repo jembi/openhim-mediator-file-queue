@@ -49,7 +49,7 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "jshint": "^2.11.1",
+    "jshint": "^2.13.4",
     "rewire": "^2.5.2",
     "tap": "^12.6.5"
   }
