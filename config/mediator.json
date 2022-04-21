@@ -9,7 +9,7 @@
       "name": "File queue",
       "host": "localhost",
       "path": "/workers/test",
-      "port": "3510",
+      "port": "4002",
       "primary": true,
       "type": "http"
     }
@@ -76,96 +76,14 @@
   "config": {
     "endpoints": [
       {
-        "name": "subscription",
-        "path": "/subscription",
-        "url": "http://localhost:3510/momconnect/subscription/public",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "subscriptionIdentification",
-        "path": "/subscriptionIdentification",
-        "url": "http://localhost:3510/momconnect/subscription/identification",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "SubscriptionRegistration",
-        "path": "/subscriptionRegistration",
-        "url": "http://localhost:3510/momconnect/subscription/registration",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "optout",
-        "path": "/optout",
-        "url": "http://localhost:3510/momconnect/optout",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "helpdesk",
-        "path": "/helpdesk",
-        "url": "http://localhost:3510/momconnect/helpdesk",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "loss",
-        "path": "/loss",
-        "url": "http://localhost:3510/momconnect/loss",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "switch",
-        "path": "/switch",
-        "url": "http://localhost:3510/momconnect/switch",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "pmtctSubscription",
-        "path": "/pmtctSubscription",
-        "url": "http://localhost:3510/momconnect/pmtctSubscription",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "pmtctOptout",
-        "path": "/pmtctOptout",
-        "url": "http://localhost:3510/momconnect/pmtctOptout",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "nurseSubscription",
-        "path": "/nurseSubscription",
-        "url": "http://localhost:3510/nurseconnect/subscription",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "nurseOptout",
-        "path": "/nurseOptout",
-        "url": "http://localhost:3510/nurseconnect/optout",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "nurseHelpdesk",
-        "path": "/nurseHelpdesk",
-        "url": "http://localhost:3510/nurseconnect/helpdesk",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
-      }, {
-        "name": "messageChannel",
-        "path": "/msgChannel",
-        "url": "http://localhost:3510/momconnect/msgChannel",
-        "paused": true,
-        "parallel": 1,
-        "disableAutoChannelManagement": true
+        "name": "echoServer",
+        "path": "/test",
+        "url": "http://localhost:8000",
+        "paused": false,
+        "parallel": 2,
+        "updateTx": true,
+        "forwardMetadata": true,
+        "disableAutoChannelManagement": false
       }
     ]
   }
