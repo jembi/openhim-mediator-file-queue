@@ -9,7 +9,7 @@
       "name": "File queue",
       "host": "localhost",
       "path": "/workers/test",
-      "port": "4002",
+      "port": "3510",
       "primary": true,
       "type": "http"
     }
