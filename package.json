@@ -31,7 +31,7 @@
     "mkdirp": "^0.5.0",
     "mv": "^2.1.1",
     "needle": "^0.10.0",
-    "openhim-mediator-utils": "^0.2.3",
+    "openhim-mediator-utils": "^0.4.0",
     "server-graceful-shutdown": "^0.1.2",
     "type-is": "^1.6.16",
     "winston": "^1.1.2"
