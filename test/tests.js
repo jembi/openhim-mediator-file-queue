@@ -6,11 +6,12 @@ const rewire = require('rewire');
 const testUtils = require('./utils');
 const testServer = require('./test-openhim-server');
 const testUpstreamServer = require('./test-upstream-server');
-const Winston = require('winston');
+const logger = require('winston');
 const request = require('request');
 
 var index = null;
 var setupEndpoint = rewire('../lib/setupEndpoint');
+var winstonLogFormat;
 
 // this forces the use of the test config file
 process.env.NODE_ENV = 'test';
@@ -21,24 +22,37 @@ process.env.API_URL = 'http://localhost:7070';
 process.env.API_USERNAME = 'root@openhim.org';
 process.env.API_PASSWORD = 'password';
 
+logger.clear();
+  
+winstonLogFormat = logger.format.printf(function(info) {
+  return `${info.timestamp} ${info.level}: ${info.message}`;
+});
+
+logger.remove(new logger.transports.Console());
+
+logger.add(new logger.transports.Console({
+  format: logger.format.combine(logger.format.timestamp(), logger.format.colorize(), winstonLogFormat),
+  level: "info"
+}));
+
 function beforeEach(callback) {
   index = rewire('../lib/index');
   testServer.start(() => {
     testUpstreamServer.start(() => {
-      Winston.info('Test servers started...');
+      logger.info('Test servers started...');
       callback();
     });
   });
 }
 
 function cleanUp(callback){
-  Winston.info('teardown');
+  logger.info('teardown');
   setupEndpoint.__set__('WorkerInstances', []);
   setupEndpoint.destroyWorkers(() => {
     // Shutdown servers
     testUpstreamServer.stop(() => {
       testServer.stop(() => {
-        Winston.info('Test servers stopped');
+        logger.info('Test servers stopped');
         callback();
       });
     });
@@ -87,7 +101,7 @@ tap.test('should send file upstream', function(t){
   beforeEach(() => {
     t.plan(3);
     index.start((res) => {
-      Winston.info(res);
+      logger.info(res);
       const options = {
         url: 'http://root:password@localhost:4002/test',
         body: 'This is a test'
@@ -95,8 +109,8 @@ tap.test('should send file upstream', function(t){
       t.ok(res);
       setTimeout(function() {
         request.post(options, (err, res) => {
-          Winston.info(res.body);
-          Winston.info(res.statusCode);
+          logger.info(res.body);
+          logger.info(res.statusCode);
           t.equal(res.statusCode, 202);
           setTimeout(function() {
             index.stop(() => {
@@ -117,7 +131,7 @@ tap.test('should fail to send file upstream mediator config', function(t){
   beforeEach(() => {
     t.plan(3);
     index.start((res) => {
-      Winston.info(res);
+      logger.info(res);
       const options = {
         url: 'http://root:password@localhost:4002/invalidPath',
         body: 'This is a test'
@@ -125,8 +139,8 @@ tap.test('should fail to send file upstream mediator config', function(t){
       t.ok(res);
       setTimeout(function() {
         request.post(options, (err, res) => {
-          Winston.info(res.body);
-          Winston.info(res.statusCode);
+          logger.info(res.body);
+          logger.info(res.statusCode);
           t.equal(res.statusCode, 404);
           setTimeout(function() {
             index.stop(() => {

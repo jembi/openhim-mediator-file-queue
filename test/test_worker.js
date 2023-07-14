@@ -48,7 +48,7 @@ tap.test('moveTx - should move both body and metadata files', function(t) {
     t.ok(fs.statSync('test/to/xb58d4327b141ebffe6e990c-metadata.json'));
     t.end();
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('moveTx - should move just body if forward metadata is false', function(t) {
@@ -59,7 +59,7 @@ tap.test('moveTx - should move just body if forward metadata is false', function
     t.ok(fs.statSync('test/to/xb58d4327b141ebffe6e990c.txt'));
     t.end();
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('moveTx - should throw an error if metadata file doesnt exist', function(t) {
@@ -69,7 +69,7 @@ tap.test('moveTx - should throw an error if metadata file doesnt exist', functio
     t.ok(err);
     t.end();
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('moveTx - should throw an error if body file doesnt exist', function(t) {
@@ -93,7 +93,7 @@ tap.test('delTx - should delete both files', function(t) {
       t.ok(err);
     });
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('delTx - should just body file when not forwarding metadata', function(t) {
@@ -109,7 +109,7 @@ tap.test('delTx - should just body file when not forwarding metadata', function(
       t.notOk(err);
     });
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('delTx - should throw an error if metadata file doesnt exist', function(t) {
@@ -119,7 +119,7 @@ tap.test('delTx - should throw an error if metadata file doesnt exist', function
     t.ok(err);
     t.end();
   });
-  t.tearDown(cleanupTestFiles);
+  t.teardown(cleanupTestFiles);
 });
 
 tap.test('delTx - should throw an error if body file doesnt exist', function(t) {
