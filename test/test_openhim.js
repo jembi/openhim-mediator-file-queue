@@ -5,6 +5,9 @@ const testServer = require('./test-openhim-server');
 const testUtils = require('./utils');
 const URL = require('url');
 const OpenHIM = require('../lib/openhim.js');
+const logger = require('winston');
+
+var winstonLogFormat;
 
 const opts = {
   username: 'root@openhim.org',
@@ -17,6 +20,20 @@ const badOpts = {
   password: 'password',
   apiURL: 'http://localhost:1337'
 };
+
+logger.clear();
+  
+winstonLogFormat = logger.format.printf(function(info) {
+  return `${info.timestamp} ${info.level}: ${info.message}`;
+});
+
+logger.remove(new logger.transports.Console());
+
+logger.add(new logger.transports.Console({
+  format: logger.format.combine(logger.format.timestamp(), logger.format.colorize(), winstonLogFormat),
+  level: 'info'
+}));
+
 
 tap.test('OpenHIM module - fetchChannelByName()', (t) => {
   let openhim = OpenHIM(opts);

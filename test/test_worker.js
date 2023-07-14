@@ -4,12 +4,29 @@ var fs = require('graceful-fs');
 var tap = require('tap');
 var rewire = require('rewire');
 var testUtils = require('./utils');
-
+var logger = require('winston');
 var worker = rewire('../lib/worker');
+
+var winstonLogFormat;
 
 // ************************************************
 // tests for worker.js
 // ************************************************
+
+logger.clear();
+  
+winstonLogFormat = logger.format.printf(function(info) {
+  return `${info.timestamp} ${info.level}: ${info.message}`;
+});
+
+logger.remove(new logger.transports.Console());
+
+logger.add(new logger.transports.Console({
+  format: logger.format.combine(logger.format.timestamp(), logger.format.colorize(), winstonLogFormat),
+  level: 'info'
+}));
+
+
 function setupTestFiles(bodyFile, metaFile) {
   fs.mkdirSync('test/from');
   fs.mkdirSync('test/to');
