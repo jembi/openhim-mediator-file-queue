@@ -32,7 +32,7 @@ logger.remove(new logger.transports.Console());
 
 logger.add(new logger.transports.Console({
   format: logger.format.combine(logger.format.timestamp(), logger.format.colorize(), winstonLogFormat),
-  level: "info"
+  level: 'info'
 }));
 
 function beforeEach(callback) {
