@@ -12,7 +12,7 @@ var winstonLogFormat;
 const opts = {
   username: 'root@openhim.org',
   password: 'password',
-  apiURL: 'http://localhost:7070'
+  apiURL: 'http://localhost:7000'
 };
 
 const badOpts = {

@@ -66,8 +66,8 @@ const server = http.createServer(function (req, res) {
 
 function start (callback) {
   server.setTimeout(2000);
-  server.listen(7070, function () {
-    Winston.info('Listening on 7070');
+  server.listen(7000, function () {
+    Winston.info('Listening on 7000');
     callback();
   });
 
@@ -83,5 +83,5 @@ exports.stop = stop;
 
 if (!module.parent) {
   // if this script is run directly, start the server
-  start('first time',() => {Winston.info('OpenHIM Server listening on 7070...');});
+  start('first time',() => {Winston.info('OpenHIM Server listening on 7000...');});
 }

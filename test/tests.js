@@ -18,7 +18,7 @@ process.env.NODE_ENV = 'test';
 process.env.SERVER_PORT = 4002;
 process.env.HEARTBEAT = false;
 process.env.LOG_LEVEL = 'error';
-process.env.API_URL = 'http://localhost:7070';
+process.env.API_URL = 'http://localhost:7000';
 process.env.API_USERNAME = 'root@openhim.org';
 process.env.API_PASSWORD = 'password';
 
