@@ -37,7 +37,7 @@ logger.add(new logger.transports.Console({
 
 function beforeEach(callback) {
   index = rewire('../lib/index');
-  testServer.start(() => {
+  testServer.start(7000, () => {
     testUpstreamServer.start(() => {
       logger.info('Test servers started...');
       callback();

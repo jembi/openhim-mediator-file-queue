@@ -64,10 +64,10 @@ const server = http.createServer(function (req, res) {
   });
 });
 
-function start (callback) {
+function start (port, callback) {
   server.setTimeout(2000);
-  server.listen(7000, function () {
-    Winston.info('Listening on 7000');
+  server.listen(port, function () {
+    Winston.info('Listening on ' + port);
     callback();
   });
 
