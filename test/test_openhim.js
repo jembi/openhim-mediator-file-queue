@@ -9,12 +9,6 @@ const logger = require('winston');
 
 var winstonLogFormat;
 
-const opts = {
-  username: 'root@openhim.org',
-  password: 'password',
-  apiURL: 'http://localhost:7000'
-};
-
 const badOpts = {
   username: 'root@openhim.org',
   password: 'password',
