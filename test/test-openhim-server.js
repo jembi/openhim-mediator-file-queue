@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 var enableDestroy = require('server-graceful-shutdown');
