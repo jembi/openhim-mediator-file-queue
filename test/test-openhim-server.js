@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 var enableDestroy = require('server-graceful-shutdown');
@@ -66,10 +64,10 @@ const server = http.createServer(function (req, res) {
   });
 });
 
-function start (callback) {
+function start (port, callback) {
   server.setTimeout(2000);
-  server.listen(7070, function () {
-    Winston.info('Listening on 7070');
+  server.listen(port, function () {
+    Winston.info('Listening on ' + port);
     callback();
   });
 
@@ -85,5 +83,5 @@ exports.stop = stop;
 
 if (!module.parent) {
   // if this script is run directly, start the server
-  start('first time',() => {Winston.info('OpenHIM Server listening on 7070...');});
+  start('first time',() => {Winston.info('OpenHIM Server listening on 7000...');});
 }
